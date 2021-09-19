@@ -7,18 +7,18 @@ on:
 
 jobs:
   ci:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # the operating system to run on
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2 # the first action to do
       - name: Set up JDK 11
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v2 # the java to install
         with:
-          java-version: '11'
-          distribution: 'adopt'
-          cache: maven
+          java-version: '11' # the java version
+          distribution: 'adopt' # the java distribution type
+          cache: maven # the framework we use
       - name: Build with Maven
-        run: mvn --batch-mode --update-snapshots verify
+        run: mvn --batch-mode --update-snapshots verify # the command to run
 
   cd:
     needs: ci # first dependency need before running
@@ -29,7 +29,7 @@ jobs:
       - name: Heroku deployment # unnecessary but added to see the test
       - uses: akhileshns/heroku-deploy@v3.12.12 # the heroku deploy app to use for deployment
         with:
-          heroku_api_key: ${{secrets.HEROKU_API}} # the secret api key to access my heroku server
+          heroku_api_key: ${{secrets.HEROKU_API}} # the secret api key to access my heroku server or app
           heroku_app_name: "money-transfer-act" #the name of the app I created on heroku
           heroku_email: "sertseshewa@gmail.com" #the email I use to create heroku account
           healthcheck: "https://money-transfer-act.herokuapp.com/actuator/health" # a health check

@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  build:
+  ci:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,3 +19,17 @@ jobs:
           cache: maven
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots verify
+
+  cd:
+    needs: ci # first dependency need before running
+    runs-on: ubuntu-latest # the operating system to use
+
+    steps:
+      - uses: action/checkout@v2 # first checking out the code on github
+      - name: Heroku deployment # unnecessary but added to see the test
+      - uses: akhileshns/heroku-deploy@v3.12.12 # the heroku deploy app to use for deployment
+        with:
+          heroku_api_key: ${{secrets.heroku_API}} # the secret api key to access my heroku server
+          heroku_app_name: "money-transfer-act" #the name of the app I created on heroku
+          heroku_email: "sertseshewa@gmail.com" #the email I use to create heroku account
+          healthcheck: "https://money-transfer-act.herokuapp.com/actuator/health" # a health check

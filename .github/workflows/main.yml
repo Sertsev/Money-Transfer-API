@@ -26,7 +26,6 @@ jobs:
 
     steps:
       - uses: action/checkout@v2 # first checking out the code on github
-      - name: Heroku deployment # unnecessary but added to see the test
       - uses: akhileshns/heroku-deploy@v3.12.12 # the heroku deploy app to use for deployment
         with:
           heroku_api_key: ${{secrets.HEROKU_API}} # the secret api key to access my heroku server or app

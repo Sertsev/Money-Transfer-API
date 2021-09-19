@@ -29,7 +29,7 @@ jobs:
       - name: Heroku deployment # unnecessary but added to see the test
       - uses: akhileshns/heroku-deploy@v3.12.12 # the heroku deploy app to use for deployment
         with:
-          heroku_api_key: ${{secrets.heroku_API}} # the secret api key to access my heroku server
+          heroku_api_key: ${{secrets.HEROKU_API}} # the secret api key to access my heroku server
           heroku_app_name: "money-transfer-act" #the name of the app I created on heroku
           heroku_email: "sertseshewa@gmail.com" #the email I use to create heroku account
           healthcheck: "https://money-transfer-act.herokuapp.com/actuator/health" # a health check

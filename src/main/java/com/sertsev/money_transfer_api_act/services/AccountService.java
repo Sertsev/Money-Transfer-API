@@ -36,6 +36,14 @@ public class AccountService {
         return accountRepository.findAll();
     }
 
+    public Account getAccountById(Long senderId) {
+        return accountRepository.findById(senderId).orElse(null);
+    }
+
+    public void updateBalance(Account senderAccount, double newSenderBalance) {
+        senderAccount.setBalance(newSenderBalance);
+        accountRepository.save(senderAccount);
+    }
 
 }
 

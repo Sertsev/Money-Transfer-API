@@ -10,5 +10,4 @@ public class TransferRequest {
     private Long receiverId;
     private Double amount;
     private String reason;
-
 }
